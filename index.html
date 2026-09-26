@@ -890,58 +890,14 @@
             100% { transform: scale(1.06); }
         }
 
-        /* ═══════════════════════
-           CARRETERA ANIMADA
-           ═══════════════════════ */
-        .road-footer {
-            position: fixed;
-            bottom: 0; left: 0;
-            width: 100vw;
-            height: 32px;
-            background: #374151;
-            z-index: 40;
-            overflow: hidden;
-            box-shadow: 0 -3px 15px rgba(0,0,0,0.3);
-        }
 
-        .road-lines {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            width: 200%;
-            height: 4px;
-            background: repeating-linear-gradient(90deg, #facc15 0px, #facc15 30px, transparent 30px, transparent 60px);
-            animation: roadScroll 2s linear infinite;
-        }
-
-        .road-vehicle {
-            position: absolute;
-            bottom: 4px;
-            font-size: 22px;
-            animation: vehicleMove 12s linear infinite;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-        }
-
-        .road-vehicle:nth-child(2) { animation-delay: -4s; font-size: 20px; }
-        .road-vehicle:nth-child(3) { animation-delay: -8s; font-size: 18px; }
-
-        @keyframes roadScroll {
-            0% { transform: translateY(-50%) translateX(0); }
-            100% { transform: translateY(-50%) translateX(-50%); }
-        }
-
-        @keyframes vehicleMove {
-            0% { left: -50px; }
-            100% { left: calc(100vw + 50px); }
-        }
 
         /* ══════════════════
            BOTÓN PDF
            ══════════════════ */
         .bottom-left-btn {
             position: fixed;
-            bottom: 46px;
+            bottom: 18px;
             left: 18px;
             z-index: 1000;
             background: linear-gradient(135deg, #ffffff, #f8fafc);
@@ -995,13 +951,7 @@
 <!-- Cinta de precaución animada -->
 <div class="caution-tape-top"></div>
 
-<!-- Carretera animada al fondo -->
-<div class="road-footer">
-    <div class="road-lines"></div>
-    <span class="road-vehicle">🚛</span>
-    <span class="road-vehicle">🏗️</span>
-    <span class="road-vehicle">🚜</span>
-</div>
+
 
 <!-- Botón PDF -->
 <button class="bottom-left-btn" onclick="generarCartonesPDF()" title="Crear cartones listos para imprimir">
@@ -1358,21 +1308,21 @@
             this.size = Math.random() * 9 + 7;
             this.color = ictColors[Math.floor(Math.random() * ictColors.length)];
             const angleRad = (angleDeg + (Math.random() - 0.5) * 50) * (Math.PI / 180);
-            const speed = speedBase * (0.7 + Math.random() * 0.6);
+            const speed = speedBase * (0.85 + Math.random() * 0.7);
             this.speedX = Math.cos(angleRad) * speed;
             this.speedY = Math.sin(angleRad) * speed;
-            this.gravity = 0.26;
-            this.drag = 0.985;
+            this.gravity = 0.35;
+            this.drag = 0.988;
             this.wobble = Math.random() * 10;
-            this.wobbleSpeed = 0.08 + Math.random() * 0.06;
+            this.wobbleSpeed = 0.1 + Math.random() * 0.08;
             this.opacity = 1;
-            this.decay = Math.random() * 0.005 + 0.004;
+            this.decay = Math.random() * 0.006 + 0.005;
         }
         update() {
             this.speedX *= this.drag;
             this.speedY *= this.drag;
             this.speedY += this.gravity;
-            this.x += this.speedX + Math.sin(this.wobble) * 1.5;
+            this.x += this.speedX + Math.sin(this.wobble) * 1.8;
             this.y += this.speedY;
             this.wobble += this.wobbleSpeed;
             this.opacity -= this.decay;
@@ -1394,9 +1344,9 @@
         const ballRect = displayBall.getBoundingClientRect();
         const ballX = ballRect.left + ballRect.width / 2;
         const ballY = ballRect.top + ballRect.height / 2;
-        for (let i = 0; i < 120; i++) confettiParticles.push(new ConfettiParticle(ballX, ballY, Math.random() * 360, 11));
-        for (let i = 0; i < 60; i++) confettiParticles.push(new ConfettiParticle(20, window.innerHeight - 20, -55, 20));
-        for (let i = 0; i < 60; i++) confettiParticles.push(new ConfettiParticle(window.innerWidth - 20, window.innerHeight - 20, -125, 20));
+        for (let i = 0; i < 160; i++) confettiParticles.push(new ConfettiParticle(ballX, ballY, Math.random() * 360, 14));
+        for (let i = 0; i < 80; i++) confettiParticles.push(new ConfettiParticle(20, window.innerHeight - 20, -55, 24));
+        for (let i = 0; i < 80; i++) confettiParticles.push(new ConfettiParticle(window.innerWidth - 20, window.innerHeight - 20, -125, 24));
     }
 
     function triggerGrandFinale() {
